@@ -11,3 +11,6 @@ The main goal is for the snake to move and grow by eating food. Each player in t
   
 * Console app
 * C#
+
+## License
+This project is licensed with the [MIT license](LICENSE).

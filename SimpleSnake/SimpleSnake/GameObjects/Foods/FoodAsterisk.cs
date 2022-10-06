@@ -9,11 +9,11 @@ namespace SimpleSnake.GameObjects.Foods
     public class FoodAsterisk : Food
     {
         private const char FoodSymbol = '*';
-        private const int FoodPoints = 1;
+        private const int AsteriskFoodPoints = 1;
         private const ConsoleColor FoodColor = ConsoleColor.DarkYellow;
 
-        public FoodAsterisk(Field field) 
-            : base(field, FoodPoints, FoodSymbol, FoodColor)
+        public FoodAsterisk(Wall wall) 
+            : base(wall, AsteriskFoodPoints, FoodSymbol, FoodColor)
         {
         }
     }

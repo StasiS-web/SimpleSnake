@@ -16,7 +16,7 @@ namespace SimpleSnake.GameObjects
 
         private readonly Queue<Point> snakeElements;
         private readonly IList<Food> foods;
-        private readonly Field field;
+        private readonly Wall wall;
 
         private int nextLeftX;
         private int nextTopY;
@@ -29,10 +29,10 @@ namespace SimpleSnake.GameObjects
             this.foods = new List<Food>(3);
         }
 
-        public Snake(Field field)
+        public Snake(Wall wall)
             : base()
         {
-            this.field = field;
+            this.wall = wall;
             
             this.GetFoods();
             this.CreateSnake();
@@ -66,7 +66,7 @@ namespace SimpleSnake.GameObjects
 
             Point newSnakeHead = new Point(this.nextLeftX, this.nextTopY);
 
-            if (this.field.IsPointOfWall(newSnakeHead))
+            if (this.wall.IsPointOfWall(newSnakeHead))
             {
                 return false;
             }
@@ -86,9 +86,9 @@ namespace SimpleSnake.GameObjects
         }
         private void Eat(Point direction, Point currentSnakeHead)
         {
-            int points = this.foods[foodIndex].FoodPoints;
+            int length = this.foods[foodIndex].FoodPoints;
 
-            for (int i = 0; i < points; i++)
+            for (int i = 0; i < length; i++)
             {
                 Point newPoint = new Point(this.nextLeftX, this.nextTopY);
                 this.snakeElements.Enqueue(newPoint);
@@ -97,8 +97,8 @@ namespace SimpleSnake.GameObjects
                 this.GetNextPoint(direction, currentSnakeHead);
             }
 
-            this.field.AddPoints(this.snakeElements);
-            this.field.PlayerInfo();
+            this.wall.AddPoints(this.snakeElements);
+            this.wall.PlayerInfo();
 
             this.foodIndex = this.RandomFoodNumber;
             this.foods[this.foodIndex].SetRandomPosition(this.snakeElements); // Spawn new food
@@ -117,7 +117,7 @@ namespace SimpleSnake.GameObjects
             foreach (Type foodType in foodTypes)
             {
                 Food currentFood = (Food)Activator
-                    .CreateInstance(foodType, new object[] {this.field});
+                    .CreateInstance(foodType, new object[] {this.wall});
                 this.foods.Add(currentFood);
             }
         }
@@ -127,7 +127,5 @@ namespace SimpleSnake.GameObjects
             this.nextLeftX = snakeHead.LeftX + direction.LeftX;
             this.nextTopY = snakeHead.TopY + direction.TopY;
         }
-        
-        
     }
 }

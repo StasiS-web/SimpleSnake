@@ -13,11 +13,11 @@ namespace SimpleSnake
         {
             ConsoleWindow.CustomizeConsole();
 
-            Field field = new Field(60, 20);
-            Snake snake = new Snake(field);
+            Wall wall = new Wall(60, 20);
+           // Snake snake = new Snake(field);
 
-            IEngine engine = new Engine(field, snake);
-            engine.Run();
+           // IEngine engine = new Engine(field, snake);
+           // engine.Run();
         }
     }
 }

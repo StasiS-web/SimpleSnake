@@ -15,7 +15,7 @@ namespace SimpleSnake.Core
     {
         private readonly Point[] pointsOfDirections;
         private readonly Snake snake;
-        private readonly Field field;
+        private readonly Wall wall;
 
         private Direction direction;
         private double sleepTime;
@@ -26,10 +26,10 @@ namespace SimpleSnake.Core
             this.pointsOfDirections = new Point[4];
         }
 
-        public Engine(Field field, Snake snake)
+        public Engine(Wall wall, Snake snake)
             : this()
         {
-            this.field = field;
+            this.wall = wall;
             this.snake = snake;
         }
 
@@ -45,7 +45,7 @@ namespace SimpleSnake.Core
                 }
 
                 bool canMove = this.snake
-                    .CanMove(this.pointsOfDirections[(int)this.direction]);
+                    .CanMoving(this.pointsOfDirections[(int)this.direction]);
 
                 if (!canMove)
                 {
@@ -59,7 +59,7 @@ namespace SimpleSnake.Core
 
         private void AskUserForRestart()
         {
-            int leftX = this.field.LeftX + 1; // right to the field
+            int leftX = this.wall.LeftX + 1; // right to the field
             int topY = 3;           // 3 from the top
 
             Console.SetCursorPosition(leftX, topY);

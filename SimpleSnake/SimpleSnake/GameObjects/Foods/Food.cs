@@ -9,18 +9,19 @@ namespace SimpleSnake.GameObjects.Foods
 {
     public abstract class Food : Point
     {
+        
+        private readonly Wall wall;
         private readonly Random random;
-        private readonly Field field;
         private readonly ConsoleColor foodColor;
-        protected Food(Field field, int foodPoints, char foodSymbol, ConsoleColor foodColor)
-            : base(field.LeftX, field.TopY)
+        protected Food(Wall wall, int foodPoints, char foodSymbol, ConsoleColor foodColor)
+            : base(wall.LeftX, wall.TopY)
         {
-            random = new Random();
-
-            this.field = field;
+            this.wall = wall;
             this.FoodPoints = foodPoints;
             this.FoodSymbol = foodSymbol;
             this.foodColor  = foodColor;
+
+            random = new Random();
         }
 
         public int FoodPoints { get; }
@@ -30,8 +31,8 @@ namespace SimpleSnake.GameObjects.Foods
         {
             do
             {
-                LeftX = random.Next(2, field.LeftX - 2);
-                TopY = random.Next(2, field.TopY - 2);
+                LeftX = random.Next(2, wall.LeftX - 2);
+                TopY = random.Next(2, wall.TopY - 2);
             }
             while (snake.Any(x => x.LeftX == LeftX && x.TopY == TopY));
 
@@ -42,8 +43,8 @@ namespace SimpleSnake.GameObjects.Foods
 
         public bool IsFoodPoint(Point snake)
         {
-            return snake.TopY == TopY &&
-                   snake.LeftX == LeftX;
+            return snake.LeftX == LeftX &&
+                   snake.TopY == TopY;
         }
     }
 }

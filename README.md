@@ -9,7 +9,7 @@ The main goal is for the snake to move and grow by eating food. Each player in t
 
 ## :hammer: Used technologies
   
-* Console app
+* Console game
 * C#
 
 ## License

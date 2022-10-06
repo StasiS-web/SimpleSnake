@@ -1,0 +1,2 @@
+# SimpleSnake
+Workshop at Softuni
